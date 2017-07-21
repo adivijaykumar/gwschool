@@ -46,7 +46,7 @@ m_arr = []
 r_arr = []
 
 h_c = 1.0
-h_arr = np.linspace(0.1, h_c, num=40)
+h_arr = np.linspace(0.1, h_c, num=100)
 for h in h_arr:
     sol = scipy.integrate.odeint(
         dydt, [2 * 10 ** (-31), 10**(-10)], np.arange(h, 0, -0.001))
@@ -54,8 +54,12 @@ for h in h_arr:
 #    if np.amax(sol[:, 0]) == sol[:, -1]:
 #        print 'yes'
     m_arr.append(np.amax(sol[:, 0]))
-    r_arr.append((10.0/6.67)*np.amax(sol[:, 1]))
+    r_arr.append((10.0 / 6.67) * np.amax(sol[:, 1]))
 
-print m_arr
+
+print h_arr[np.argmax(m_arr)]
+print np.amax(m_arr)
+print r_arr[np.argmax(m_arr)]
+
 plt.plot(r_arr, m_arr)
 plt.show()
